@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Português Brasileiro — Roadmap Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #00875A;
+    --verde-light: #E3F5EE;
+    --verde-mid: #34C98B;
+    --amarelo: #F5A623;
+    --amarelo-light: #FEF6E4;
+    --azul: #1A56DB;
+    --azul-light: #EBF2FF;
+    --vermelho: #E53E3E;
+    --vermelho-light: #FFF5F5;
+    --roxo: #6C3FC8;
+    --roxo-light: #F0EBFF;
+    --cinza: #F7F7F5;
+    --cinza-mid: #E8E6E0;
+    --cinza-text: #6B6860;
+    --dark: #1A1A18;
+    --body: #2D2D2B;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: #FAFAF8;
+    color: var(--body);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--dark);
+    color: white;
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,135,90,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,166,35,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--verde);
+    color: white;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .hero h1 em { color: var(--verde-mid); font-style: italic; }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex; gap: 32px; flex-wrap: wrap;
+  }
+  .stat { border-left: 2px solid var(--verde); padding-left: 16px; }
+  .stat-n { font-family: var(--serif); font-size: 28px; color: white; }
+  .stat-l { font-size: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* NAV */
+  .nav {
+    background: white;
+    border-bottom: 1px solid var(--cinza-mid);
+    position: sticky;
+    top: 0; z-index: 100;
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav a {
+    font-size: 13px; color: var(--cinza-text);
+    text-decoration: none;
+    padding: 14px 18px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+    font-weight: 500;
+  }
+  .nav a:hover { color: var(--verde); border-bottom-color: var(--verde); }
+
+  /* SECTIONS */
+  .section { max-width: 900px; margin: 0 auto; padding: 56px 24px; }
+  .section-header { margin-bottom: 32px; }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 8px;
+  }
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+  .section-desc { color: var(--cinza-text); margin-top: 10px; max-width: 600px; font-size: 14px; }
+
+  /* PHASE CARDS */
+  .phases { display: grid; gap: 20px; }
+  .phase {
+    border: 1px solid var(--cinza-mid);
+    border-radius: 12px;
+    background: white;
+    overflow: hidden;
+  }
+  .phase-header {
+    display: flex; align-items: center; gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .phase-header:hover { background: var(--cinza); }
+  .phase-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 18px;
+    flex-shrink: 0;
+  }
+  .phase-title { flex: 1; }
+  .phase-title h3 { font-size: 16px; font-weight: 600; color: var(--dark); }
+  .phase-title p { font-size: 13px; color: var(--cinza-text); margin-top: 2px; }
+  .phase-meta {
+    display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+  }
+  .badge {
+    font-size: 11px; padding: 3px 10px; border-radius: 20px;
+    font-weight: 500; white-space: nowrap;
+  }
+  .chevron { font-size: 18px; color: var(--cinza-text); transition: transform .3s; }
+  .phase.open .chevron { transform: rotate(180deg); }
+  .phase-body { display: none; padding: 0 24px 24px; }
+  .phase.open .phase-body { display: block; }
+
+  .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  @media(max-width:600px) { .phase-grid { grid-template-columns: 1fr; } }
+
+  .skill-item {
+    background: var(--cinza);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .skill-item h4 { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .skill-item p { font-size: 12px; color: var(--cinza-text); }
+
+  /* RESOURCES */
+  .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .resource-card {
+    background: white;
+    border: 1px solid var(--cinza-mid);
+    border-radius: 12px;
+    padding: 20px;
+    transition: box-shadow .2s, transform .2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .resource-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .resource-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 12px;
+  }
+  .resource-card h4 { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .resource-card p { font-size: 12px; color: var(--cinza-text); line-height: 1.5; }
+  .resource-tag {
+    display: inline-block; margin-top: 10px;
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    font-weight: 600; padding: 2px 8px; border-radius: 4px;
+    font-family: var(--mono);
+  }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--cinza-mid); margin-bottom: 24px; overflow-x: auto; scrollbar-width: none; }
+  .tab-btn {
+    padding: 10px 20px; font-size: 13px; font-weight: 500;
+    color: var(--cinza-text); background: none; border: none;
+    border-bottom: 2px solid transparent; cursor: pointer;
+    white-space: nowrap; transition: all .2s;
+  }
+  .tab-btn.active { color: var(--verde); border-bottom-color: var(--verde); }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ROADMAP TIMELINE */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
+    width: 2px; background: var(--cinza-mid);
+  }
+  .tl-item { position: relative; margin-bottom: 28px; }
+  .tl-dot {
+    position: absolute; left: -24px; top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--cinza-mid);
+  }
+  .tl-week { font-family: var(--mono); font-size: 11px; color: var(--cinza-text); margin-bottom: 4px; letter-spacing: 1px; }
+  .tl-title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .tl-desc { font-size: 13px; color: var(--cinza-text); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--dark); color: white;
+    padding: 10px 14px; text-align: left;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1px;
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--cinza-mid); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--cinza); }
+  .level-badge {
+    display: inline-block; padding: 2px 10px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; font-family: var(--mono);
+  }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width:600px) { .tips-grid { grid-template-columns: 1fr; } }
+  .tip-card {
+    border-radius: 12px; padding: 20px;
+    border-left: 4px solid;
+  }
+  .tip-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; }
+
+  /* VOCAB */
+  .vocab-table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--cinza-mid); }
+  .vocab-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .vocab-table th { background: var(--dark); color: white; padding: 10px 14px; text-align: left; }
+  .vocab-table td { padding: 9px 14px; border-bottom: 1px solid var(--cinza-mid); }
+  .vocab-table tr:last-child td { border-bottom: none; }
+  .vocab-table tr:hover td { background: var(--cinza); }
+  .pt { font-weight: 600; color: var(--verde); }
+  .es { color: var(--cinza-text); }
+  .note { font-size: 11px; color: #aaa; font-style: italic; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--dark); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 32px;
+    font-size: 13px;
+  }
+  .footer strong { color: white; }
+
+  /* Separators */
+  .sep { border: none; border-top: 1px solid var(--cinza-mid); margin: 0; }
+
+  /* Colors for phases */
+  .p1 .phase-num { background: var(--verde-light); color: var(--verde); }
+  .p2 .phase-num { background: var(--azul-light); color: var(--azul); }
+  .p3 .phase-num { background: var(--amarelo-light); color: #B07900; }
+  .p4 .phase-num { background: var(--roxo-light); color: var(--roxo); }
+  .p5 .phase-num { background: var(--vermelho-light); color: var(--vermelho); }
+
+  .b-verde { background: var(--verde-light); color: var(--verde); }
+  .b-azul { background: var(--azul-light); color: var(--azul); }
+  .b-amarelo { background: var(--amarelo-light); color: #B07900; }
+  .b-roxo { background: var(--roxo-light); color: var(--roxo); }
+  .b-vermelho { background: var(--vermelho-light); color: var(--vermelho); }
+
+  /* Callout */
+  .callout {
+    border-radius: 10px; padding: 16px 20px;
+    margin: 20px 0; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .callout-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .callout-text h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .callout-text p { font-size: 13px; }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 6px; background: var(--cinza-mid); border-radius: 3px;
+    margin-top: 8px; overflow: hidden;
+  }
+  .progress-fill { height: 100%; border-radius: 3px; transition: width 1s; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">🇧🇷 ROADMAP COMPLETO</span>
+    <h1>Aprende <em>Português Brasileiro</em><br>de Cero a Nativo</h1>
+    <p class="hero-sub">Guía para hispanohablantes que van a vivir y trabajar en Brasil. Enfocada en salud, medicina, microbiología y tecnología. 100% recursos gratuitos.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-n">6</div>
+        <div class="stat-l">meses objetivo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">5</div>
+        <div class="stat-l">fases de aprendizaje</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">40+</div>
+        <div class="stat-l">recursos gratuitos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">B2–C1</div>
+        <div class="stat-l">nivel meta en 6 meses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#ventaja">Ventaja ES→PT</a>
+    <a href="#fases">Las 5 Fases</a>
+    <a href="#recursos">Recursos</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#profesional">Uso Profesional</a>
+    <a href="#vocabulario">Vocabulario Clave</a>
+    <a href="#inmersion">Inmersión</a>
+    <a href="#certificacion">Certificación</a>
+  </div>
+</nav>
+
+<!-- VENTAJA -->
+<div id="ventaja">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Por qué eres afortunado</div>
+    <h2>La ventaja del hispanohablante</h2>
+    <p class="section-desc">El español y el portugués brasileño comparten raíces latinas. Como colombiano, ya tienes una base enorme.</p>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card" style="border-color: var(--verde); background: var(--verde-light);">
+      <h4 style="color: var(--verde);">~80% vocabulario similar</h4>
+      <p style="color:#1A5E3E;">Palabras como hospital → hospital, médico → médico, computador → computador. La base ya la tienes.</p>
+    </div>
+    <div class="tip-card" style="border-color: var(--azul); background: var(--azul-light);">
+      <h4 style="color: var(--azul);">Misma estructura gramatical</h4>
+      <p style="color:#163A8A;">Sujeto-Verbo-Objeto. Los verbos se conjugan igual. Los géneros son similares. La lógica es la misma.</p>
+    </div>
+    <div class="tip-card" style="border-color: var(--amarelo); background: var(--amarelo-light);">
+      <h4 style="color: #B07900;">Pronunciación más fácil que PT europeo</h4>
+      <p style="color:#7A5000;">El português brasileño mantiene vocales abiertas y melódicas, mucho más parecido al español colombiano.</p>
+    </div>
+    <div class="tip-card" style="border-color: var(--roxo); background: var(--roxo-light);">
+      <h4 style="color: var(--roxo);">El 20% diferente es lo que importa</h4>
+      <p style="color:#4A2B8C;">Falsos amigos, nasales (ã, õ), el uso de "você", gerundios frecuentes. Eso es lo que debes dominar.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="background: #FEF3CD; border: 1px solid #F5A623; margin-top: 24px;">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-text">
+      <h4>Falsos amigos clásicos ES→PT que debes memorizar</h4>
+      <p><strong>borracha</strong> (caucho, goma, no borracha) · <strong>polvo</strong> (pulpo, no polvo) · <strong>embarazada</strong> = grávida (embaraçada = avergonzada) · <strong>borrar</strong> = apagar, no borrar (borrar = ensuciar) · <strong>exquisito</strong> = esquisito (extraño) · <strong>propina</strong> = gorjeta (propina = soborno/coima)</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<hr class="sep">
+
+<!-- LAS 5 FASES -->
+<div id="fases">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Estructura del aprendizaje</div>
+    <h2>Las 5 fases hacia el dominio</h2>
+    <p class="section-desc">Haz clic en cada fase para expandir contenido, objetivos y tareas específicas.</p>
+  </div>
+
+  <div class="phases">
+
+    <!-- FASE 1 -->
+    <div class="phase p1" id="phase1">
+      <div class="phase-header" onclick="togglePhase('phase1')">
+        <div class="phase-num">1</div>
+        <div class="phase-title">
+          <h3>Fundamentos — Despertar el oído</h3>
+          <p>Semanas 1–3 · Nivel A1</p>
+        </div>
+        <div class="phase-meta">
+          <span class="badge b-verde">Principiante</span>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="callout" style="background: var(--verde-light); border: 1px solid #9CE0C5;">
+          <div class="callout-icon">🎯</div>
+          <div class="callout-text">
+            <h4>Meta de la fase</h4>
+            <p>Saludar, presentarse, números, colores, días, meses. Entender portugués hablado despacio. 200 palabras de vocabulario activo.</p>
+          </div>
+        </div>
+        <div class="phase-grid">
+          <div class="skill-item">
+            <h4>Pronunciación brasileña</h4>
+            <p>R (aspirada/vibrante), L final, vocales nasales: ã, em, im, om, um. El "d" y "t" antes de "i" → dj/tj.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Alfabeto y fonética</h4>
+            <p>Mismo alfabeto latino. Aprende: lh, nh, ch. Tilde y acento: á, é, ê, â, ô, ã, õ.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Saludos y presentaciones</h4>
+            <p>Olá / Oi / Tudo bem? / Prazer / Me chamo / De onde você é? / Sou da Colômbia.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Verbos ser / estar / ter / ir</h4>
+            <p>Ser = ser permanente. Estar = ser temporal. Ter = tener. La base de todo.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Números y tiempo</h4>
+            <p>1–1000, días de la semana, meses, horas. Qué hora é? / Que dia é hoje?</p>
+          </div>
+          <div class="skill-item">
+            <h4>Frases de supervivencia</h4>
+            <p>Não entendo / Pode repetir? / Fala mais devagar / Onde fica...? / Quanto custa?</p>
+          </div>
+        </div>
+        <p style="margin-top:16px; font-size:13px; color:var(--cinza-text);">📚 <strong>Recursos para esta fase:</strong> Duolingo (primeras 3 unidades) + Philipe Brazuca curso gratis 7 días + 50languages.com + PortuguesWeb.com lecciones básicas</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:20%; background:var(--verde);"></div></div>
+        <p style="font-size:11px; color:var(--cinza-text); margin-top:4px;">Progreso hacia C1: 20%</p>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="phase p2" id="phase2">
+      <div class="phase-header" onclick="togglePhase('phase2')">
+        <div class="phase-num">2</div>
+        <div class="phase-title">
+          <h3>Construcción — Gramática esencial</h3>
+          <p>Semanas 4–8 · Nivel A2–B1</p>
+        </div>
+        <div class="phase-meta">
+          <span class="badge b-azul">Básico–Intermedio</span>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="callout" style="background: var(--azul-light); border: 1px solid #93B8F0;">
+          <div class="callout-icon">🎯</div>
+          <div class="callout-text">
+            <h4>Meta de la fase</h4>
+            <p>Hablar de tu trabajo, tu salud, dar instrucciones simples. Entender conversaciones cotidianas. 600 palabras activas.</p>
+          </div>
+        </div>
+        <div class="phase-grid">
+          <div class="skill-item">
+            <h4>Conjugación verbal completa</h4>
+            <p>Presente, passado (pretérito perfeito/imperfeito), futuro. El gerundio: estou trabalhando (não "trabajando").</p>
+          </div>
+          <div class="skill-item">
+            <h4>Pronombres y você</h4>
+            <p>En Brasil: você = tú. Tu existe pero es menos formal. Eles/Elas. Me/te/se/nos/lhe.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Preposiciones clave</h4>
+            <p>em/no/na/nos/nas (en), de, para, por, com, sem, sobre, entre. Contracciones: no = em+o.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Preguntas y negación</h4>
+            <p>Onde, quando, por que, como, quanto, quem, qual. Negación doble: Não sei não.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Vocabulario por campos</h4>
+            <p>Casa, familia, comida, transporte, trabajo, hospital, farmacia, banco, supermercado.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Descripciones y opiniones</h4>
+            <p>Acho que... / Eu acho legal / Que bacana! / Tá bom / Não tá certo. Adjetivos posición.</p>
+          </div>
+        </div>
+        <p style="margin-top:16px; font-size:13px; color:var(--cinza-text);">📚 <strong>Recursos para esta fase:</strong> Busuu nivel A2 + PortugueseTools.com ejercicios + Podcast "Tá Falado" (UT Austin) + Anki con mazos PT-ES + BBC Languages Portuguese</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:40%; background:var(--azul);"></div></div>
+        <p style="font-size:11px; color:var(--cinza-text); margin-top:4px;">Progreso hacia C1: 40%</p>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="phase p3" id="phase3">
+      <div class="phase-header" onclick="togglePhase('phase3')">
+        <div class="phase-num">3</div>
+        <div class="phase-title">
+          <h3>Fluidez — Conversación natural</h3>
+          <p>Semanas 9–15 · Nivel B1–B2</p>
+        </div>
+        <div class="phase-meta">
+          <span class="badge b-amarelo">Intermedio</span>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="callout" style="background: var(--amarelo-light); border: 1px solid #F5A623;">
+          <div class="callout-icon">🎯</div>
+          <div class="callout-text">
+            <h4>Meta de la fase</h4>
+            <p>Sostener conversaciones fluidas sobre temas de trabajo y vida cotidiana. Entender series y podcasts. 1500 palabras activas.</p>
+          </div>
+        </div>
+        <div class="phase-grid">
+          <div class="skill-item">
+            <h4>Subjuntivo (conjuntivo)</h4>
+            <p>Quero que você venha. Espero que esteja bem. Embora seja difícil. Muy usado en PT-BR.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Expresiones idiomáticas</h4>
+            <p>Legal / Saudade / Jeitinho brasileiro / Matar a pau / Ficar na sua / Tá ligado?</p>
+          </div>
+          <div class="skill-item">
+            <h4>Hablar de salud y trabajo</h4>
+            <p>Vocabulario médico básico: sintoma, exame, diagnóstico, receita, consulta, resultado.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Registro formal vs coloquial</h4>
+            <p>Português culto vs português falado. "Eu estou" vs "Tô". "Vou" vs "vou indo".</p>
+          </div>
+          <div class="skill-item">
+            <h4>Comprehensión auditiva</h4>
+            <p>Ver series BR con subtítulos PT. Escuchar rádio CBN, podcasts Café Brasil, noticias Globo.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Intercambio con nativos</h4>
+            <p>Tandem app, HelloTalk, iTalki (tutores gratuitos). Mínimo 2 horas/semana hablando.</p>
+          </div>
+        </div>
+        <p style="margin-top:16px; font-size:13px; color:var(--cinza-text);">📚 <strong>Recursos para esta fase:</strong> Café Brasil podcast + Series Netflix BR (3%, Sintonia, Cidade Invisível) + Tandem / HelloTalk + BBC News Brasil + Memrise avanzado + Dicionário Aulete</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%; background:#F5A623;"></div></div>
+        <p style="font-size:11px; color:var(--cinza-text); margin-top:4px;">Progreso hacia C1: 60%</p>
+      </div>
+    </div>
+
+    <!-- FASE 4 -->
+    <div class="phase p4" id="phase4">
+      <div class="phase-header" onclick="togglePhase('phase4')">
+        <div class="phase-num">4</div>
+        <div class="phase-title">
+          <h3>Profesional — Vocabulario técnico</h3>
+          <p>Semanas 16–20 · Nivel B2–C1</p>
+        </div>
+        <div class="phase-meta">
+          <span class="badge b-roxo">Avanzado</span>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="callout" style="background: var(--roxo-light); border: 1px solid #C4A3F5;">
+          <div class="callout-icon">🎯</div>
+          <div class="callout-text">
+            <h4>Meta de la fase</h4>
+            <p>Comunicarse con precisión en contextos de salud, microbiología y tecnología. Redactar informes. Presentaciones técnicas.</p>
+          </div>
+        </div>
+        <div class="phase-grid">
+          <div class="skill-item">
+            <h4>Português médico y de salud</h4>
+            <p>Anatomia, fisiologia, patologia, diagnóstico diferencial, anamnese, prescrição médica.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Microbiología en PT-BR</h4>
+            <p>Microrganismo, bactéria, vírus, fungo, cultura, antibiograma, resistência, cepa.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Tecnología y programación</h4>
+            <p>Desenvolvimento de software, código, banco de dados, algoritmo, depuração, repositório.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Escritura académica</h4>
+            <p>Artigos científicos, relatórios, e-mails formais, apresentações, resumos executivos.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Sistema de salud de Brasil</h4>
+            <p>SUS (Sistema Único de Saúde), ANVISA, CFM, CRM, convênio médico, UPA, CAPS.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Gírias de tecnología BR</h4>
+            <p>Dev, startup, pitch, sprints, product owner, squad. La tech en Brasil tiene su jerga.</p>
+          </div>
+        </div>
+        <p style="margin-top:16px; font-size:13px; color:var(--cinza-text);">📚 <strong>Recursos para esta fase:</strong> Caminhos Language Centre blog (vocabulario médico) + PubMed en PT + Scielo.br + Stack Overflow PT + Aprendergratis.es curso Portugués para Salud</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:80%; background:var(--roxo);"></div></div>
+        <p style="font-size:11px; color:var(--cinza-text); margin-top:4px;">Progreso hacia C1: 80%</p>
+      </div>
+    </div>
+
+    <!-- FASE 5 -->
+    <div class="phase p5" id="phase5">
+      <div class="phase-header" onclick="togglePhase('phase5')">
+        <div class="phase-num">5</div>
+        <div class="phase-title">
+          <h3>Nivel nativo — Inmersión total</h3>
+          <p>Semanas 21–24 + Brasil · Nivel C1–C2</p>
+        </div>
+        <div class="phase-meta">
+          <span class="badge b-vermelho">Casi Nativo</span>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="callout" style="background: var(--vermelho-light); border: 1px solid #F5A0A0;">
+          <div class="callout-icon">🎯</div>
+          <div class="callout-text">
+            <h4>Meta de la fase</h4>
+            <p>Pensar directamente en português. Entender chistes y sarcasmo. Leer literatura brasileña. Ser indistinguible de un nativo en tu campo.</p>
+          </div>
+        </div>
+        <div class="phase-grid">
+          <div class="skill-item">
+            <h4>Dialectos regionales</h4>
+            <p>Carioca (Rio), Paulistano (SP), Nordestino (Bahia/PE), Gaúcho (RS). Cada uno tiene su ritmo.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Literatura brasileña</h4>
+            <p>Machado de Assis, Clarice Lispector, Paulo Coelho, Jorge Amado. Proyecto Gutenberg PT.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Humor e ironia brasileña</h4>
+            <p>El português tem muito duplo sentido. Stand-up comedy BR: Porta dos Fundos (YouTube).</p>
+          </div>
+          <div class="skill-item">
+            <h4>Cultura e identidade</h4>
+            <p>Samba, Carnaval, futebol, política, gastronomia regional. Entender la cultura = entender el idioma.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Examen CELPE-Bras</h4>
+            <p>Certificação de Proficiência em Língua Portuguesa para Estrangeiros. Reconocido oficialmente en Brasil para trabajar.</p>
+          </div>
+          <div class="skill-item">
+            <h4>Redes sociales en PT</h4>
+            <p>Twitter/X BR, Reddit r/brasil, grupos de Facebook de medicina/tech en PT. Consume solo en PT.</p>
+          </div>
+        </div>
+        <p style="margin-top:16px; font-size:13px; color:var(--cinza-text);">📚 <strong>Recursos para esta fase:</strong> Porta dos Fundos (YouTube) + Rádio CBN ao vivo + Jornal O Globo + Scielo artículos + r/brasil + Ciberdúvidas (dudas lingüísticas)</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:95%; background:var(--vermelho);"></div></div>
+        <p style="font-size:11px; color:var(--cinza-text); margin-top:4px;">Progreso hacia C1: 95%+</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<hr class="sep">
+
+<!-- RECURSOS GRATUITOS -->
+<div id="recursos">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Herramientas y plataformas</div>
+    <h2>Recursos 100% gratuitos</h2>
+    <p class="section-desc">Todos con enlace directo. Sin pago, sin trampa.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('apps')">📱 Apps</button>
+    <button class="tab-btn" onclick="switchTab('youtube')">▶️ YouTube</button>
+    <button class="tab-btn" onclick="switchTab('webs')">🌐 Sitios Web</button>
+    <button class="tab-btn" onclick="switchTab('podcasts')">🎧 Podcasts</button>
+    <button class="tab-btn" onclick="switchTab('intercambio')">🗣️ Intercambio</button>
+    <button class="tab-btn" onclick="switchTab('medias')">📺 Medios BR</button>
+  </div>
+
+  <div id="tab-apps" class="tab-pane active">
+    <div class="resources-grid">
+      <a class="resource-card" href="https://www.duolingo.com" target="_blank">
+        <div class="resource-icon" style="background:#E5F9D0;">🦜</div>
+        <h4>Duolingo</h4>
+        <p>Portugués brasileño gamificado. Ideal para hábito diario de 10–15 min. Cubre A1–A2 muy bien.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">A1 → A2</span>
+      </a>
+      <a class="resource-card" href="https://www.busuu.com/es/languages/portuguese" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">🎓</div>
+        <h4>Busuu</h4>
+        <p>Lecciones con corrección de nativos. Modo gratuito cubre fundamentos con buena profundidad.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">A1 → B1</span>
+      </a>
+      <a class="resource-card" href="https://www.memrise.com" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">🧠</div>
+        <h4>Memrise</h4>
+        <p>Videos de nativos reales hablando. Repetición espaciada. Excelente para acento brasileño auténtico.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">A2 → B2</span>
+      </a>
+      <a class="resource-card" href="https://apps.ankiweb.net" target="_blank">
+        <div class="resource-icon" style="background:#F0EBFF;">🃏</div>
+        <h4>Anki</h4>
+        <p>Flashcards con repetición espaciada científica. Descarga el mazo "Portuguese (Brazil) Core" gratuito.</p>
+        <span class="resource-tag" style="background:var(--roxo-light); color:var(--roxo);">Todos los niveles</span>
+      </a>
+      <a class="resource-card" href="https://www.tandem.net/es" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">💬</div>
+        <h4>Tandem</h4>
+        <p>Conecta con brasileños que quieren aprender español. Intercambio de idiomas gratis por chat y voz.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">B1 → C1</span>
+      </a>
+      <a class="resource-card" href="https://www.hellotalk.com" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">🌍</div>
+        <h4>HelloTalk</h4>
+        <p>Comunidad de hablantes nativos. Corrección en tiempo real. Feed de posts en PT para leer a diario.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">A2 → C1</span>
+      </a>
+      <a class="resource-card" href="https://www.50languages.com/aprender-portugu%C3%A9s-br-gratis" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">🗣️</div>
+        <h4>50languages</h4>
+        <p>100 lecciones gratuitas de PT-BR con audio MP3 descargable. Perfecto sin conexión.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">A1 → A2</span>
+      </a>
+      <a class="resource-card" href="https://forvo.com/languages/pt/" target="_blank">
+        <div class="resource-icon" style="background:#FFF5F5;">🔊</div>
+        <h4>Forvo</h4>
+        <p>Pronunciación de cualquier palabra grabada por nativos. Compara acentos carioca, paulistano, nordestino.</p>
+        <span class="resource-tag" style="background:var(--vermelho-light); color:var(--vermelho);">Pronunciación</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="tab-youtube" class="tab-pane">
+    <div class="resources-grid">
+      <a class="resource-card" href="https://www.youtube.com/@PhilipeBrazuca" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">🇧🇷</div>
+        <h4>Philipe Brazuca</h4>
+        <p>El mejor canal para hispanohablantes. Enfocado en PT-BR cotidiano. Curso gratuito de 7 días disponible.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">A1 → B2 · ES→PT</span>
+      </a>
+      <a class="resource-card" href="https://www.youtube.com/@PortuguesPod101" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">📚</div>
+        <h4>PortuguesePod101</h4>
+        <p>Cientos de videos de PT-BR gratis. Lecciones estructuradas con explicaciones claras para todos los niveles.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">A1 → C1</span>
+      </a>
+      <a class="resource-card" href="https://www.youtube.com/@PortaBrasil_" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">📖</div>
+        <h4>Português 21</h4>
+        <p>Vocabulario útil, frases cotidianas y comprensión auditiva. Ritmo ideal para principiantes.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">A1 → B1</span>
+      </a>
+      <a class="resource-card" href="https://www.youtube.com/@portadosfundos" target="_blank">
+        <div class="resource-icon" style="background:#F0EBFF;">😄</div>
+        <h4>Porta dos Fundos</h4>
+        <p>Comedia brasileña con millones de seguidores. Humor, coloquialismos, sarcasmo nativo. Nivel avanzado.</p>
+        <span class="resource-tag" style="background:var(--roxo-light); color:var(--roxo);">B2 → C2 · Humor</span>
+      </a>
+      <a class="resource-card" href="https://www.youtube.com/@g1" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">📰</div>
+        <h4>G1 Globo Notícias</h4>
+        <p>Noticias de Brasil en PT formal. Excelente para vocabulario de actualidad, salud y tecnología.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">B1 → C1 · Noticias</span>
+      </a>
+      <a class="resource-card" href="https://www.youtube.com/@MosaLingua" target="_blank">
+        <div class="resource-icon" style="background:#FFF5F5;">🎯</div>
+        <h4>MosaLingua</h4>
+        <p>Trucos de poliglota para aprender PT-BR rápido. Canal en español con consejos prácticos de inmersión.</p>
+        <span class="resource-tag" style="background:var(--vermelho-light); color:var(--vermelho);">Todos · Estrategia</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="tab-webs" class="tab-pane">
+    <div class="resources-grid">
+      <a class="resource-card" href="https://portuguesweb.com" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">📝</div>
+        <h4>PortuguesWeb.com</h4>
+        <p>Lecciones estructuradas con audio, gramática y vocabulario. Perfecto para principiantes autónomos.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">A1 → B1 · Gramática</span>
+      </a>
+      <a class="resource-card" href="https://www.portuguesetools.com/es" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">🔧</div>
+        <h4>PortugueseTools.com</h4>
+        <p>Ejercicios interactivos, sopas de letras, fill-in-the-blank. Personalizables por nivel. Todo PT-BR.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">A1 → B2 · Ejercicios</span>
+      </a>
+      <a class="resource-card" href="https://aprendergratis.es/cursos-online/idiomas/portugues/" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">🎓</div>
+        <h4>AprenderGratis.es</h4>
+        <p>Cursos de PT-BR de Coursera/Udemy gratis. Incluye uno específico de <strong>Portugués para Salud</strong>.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">A1 → C1 · Cursos</span>
+      </a>
+      <a class="resource-card" href="http://aulete.com.br" target="_blank">
+        <div class="resource-icon" style="background:#F0EBFF;">📖</div>
+        <h4>Dicionário Aulete</h4>
+        <p>El diccionario digital más completo de PT-BR. Definiciones, ejemplos, connotaciones. Ideal para nivel B2+.</p>
+        <span class="resource-tag" style="background:var(--roxo-light); color:var(--roxo);">B1 → C2 · Diccionario</span>
+      </a>
+      <a class="resource-card" href="https://idixlingua.com/algunos-recursos-gratuitos-para-practicar-portugues-en-linea/" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">🗂️</div>
+        <h4>IdixLingua</h4>
+        <p>Directorio de recursos curados para practicar PT online. Incluye Ciberdúvidas y material avanzado.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">B1 → C2</span>
+      </a>
+      <a class="resource-card" href="https://philipebrazuca.com/cursos-gratis-de-portugues/" target="_blank">
+        <div class="resource-icon" style="background:#FFF5F5;">⭐</div>
+        <h4>Philipe Brazuca — Curso PDF</h4>
+        <p>Guía estructurada en PDF + curso gratis 7 días por email. Perfecto para hispanohablantes desde cero.</p>
+        <span class="resource-tag" style="background:var(--vermelho-light); color:var(--vermelho);">A1 → A2 · Recomendado</span>
+      </a>
+      <a class="resource-card" href="https://www.wordreference.com/ptes/" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">🔤</div>
+        <h4>WordReference PT–ES</h4>
+        <p>El mejor diccionario portugués–español online. Foros con discusiones nativas sobre uso real.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">Todos · Traducción</span>
+      </a>
+      <a class="resource-card" href="https://scielo.br" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">🔬</div>
+        <h4>SciELO Brasil</h4>
+        <p>Biblioteca de artículos científicos brasileños. Medicina, microbiología, tecnología. Todo en PT-BR real.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">C1 · Ciencia BR</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="tab-podcasts" class="tab-pane">
+    <div class="resources-grid">
+      <a class="resource-card" href="https://cafebrasil.com.br/podcast" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">☕</div>
+        <h4>Café Brasil</h4>
+        <p>+800 episodios. Cultura, ciencia, economía, salud, espiritualidad. Português coloquial real. Nivel B2+.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">B2 → C2 · Cultura</span>
+      </a>
+      <a class="resource-card" href="https://coerll.utexas.edu/brazilpod/tafalado/" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">🎙️</div>
+        <h4>Tá Falado (UT Austin)</h4>
+        <p>Podcast académico de la Universidad de Texas. Diseñado para hispanohablantes. Explica diferencias ES–PT.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">A2 → B2 · ES→PT</span>
+      </a>
+      <a class="resource-card" href="https://www.portuguesepod101.com/portuguese-podcast/" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">📻</div>
+        <h4>PortuguesePod101</h4>
+        <p>+400 episodios ordenados por nivel. Cada episodio tiene diálogo, vocabulario y notas culturales.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">A1 → C1</span>
+      </a>
+      <a class="resource-card" href="https://falagringo.com" target="_blank">
+        <div class="resource-icon" style="background:#F0EBFF;">🌎</div>
+        <h4>Fala Gringo!</h4>
+        <p>Episodios sobre cultura brasileña y aspectos del PT-BR. Pronunciación clara. Ideal desde A2.</p>
+        <span class="resource-tag" style="background:var(--roxo-light); color:var(--roxo);">A2 → B2</span>
+      </a>
+      <a class="resource-card" href="https://g1.globo.com/podcast/" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">📡</div>
+        <h4>G1 Podcasts (Globo)</h4>
+        <p>Noticias y análisis en PT-BR formal. Excelente para vocabulario técnico y actualidad brasileña.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">B1 → C1 · Noticias</span>
+      </a>
+      <a class="resource-card" href="https://cbn.globoradio.globo.com/" target="_blank">
+        <div class="resource-icon" style="background:#FFF5F5;">📢</div>
+        <h4>Rádio CBN (ao vivo)</h4>
+        <p>Radio de noticias 24h en PT-BR. La mejor para acostumbrar el oído a ritmo nativo real.</p>
+        <span class="resource-tag" style="background:var(--vermelho-light); color:var(--vermelho);">B2 → C2 · Live</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="tab-intercambio" class="tab-pane">
+    <div class="resources-grid">
+      <a class="resource-card" href="https://www.tandem.net/es" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">🤝</div>
+        <h4>Tandem</h4>
+        <p>Intercambio lingüístico 1-a-1. Busca brasileños que quieran aprender español. Chat, voz y video.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">B1 → C1 · Conversación</span>
+      </a>
+      <a class="resource-card" href="https://www.hellotalk.com" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">💌</div>
+        <h4>HelloTalk</h4>
+        <p>Red social de idiomas. Publica en PT y recibe correcciones de nativos. Feed en PT para lectura diaria.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">A2 → C1</span>
+      </a>
+      <a class="resource-card" href="https://discord.gg/portuguese" target="_blank">
+        <div class="resource-icon" style="background:#F0EBFF;">🎮</div>
+        <h4>Discord — Learn Portuguese</h4>
+        <p>Comunidades en Discord con canales de práctica, corrección y conversación con nativos. 100% gratis.</p>
+        <span class="resource-tag" style="background:var(--roxo-light); color:var(--roxo);">A2 → C2 · Comunidad</span>
+      </a>
+      <a class="resource-card" href="https://www.reddit.com/r/Portuguese/" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">📋</div>
+        <h4>r/Portuguese (Reddit)</h4>
+        <p>Foro activo para estudiantes y nativos. Resuelve dudas, practica escritura, lee publicaciones reales.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">Todos los niveles</span>
+      </a>
+      <a class="resource-card" href="https://www.italki.com/teachers/portuguese" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">👩‍🏫</div>
+        <h4>italki — Tutores gratuitos</h4>
+        <p>Algunos community tutors ofrecen sesiones gratuitas de prueba. Conversación real con nativos.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">B1 → C1</span>
+      </a>
+      <a class="resource-card" href="https://www.reddit.com/r/brasil/" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">🇧🇷</div>
+        <h4>r/brasil</h4>
+        <p>El Reddit de Brasil. Lee lo que los brasileños escriben realmente. Léxico, memes, política, cultura.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">B2 → C2 · Auténtico</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="tab-medias" class="tab-pane">
+    <div class="resources-grid">
+      <a class="resource-card" href="https://oglobo.globo.com" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">📰</div>
+        <h4>O Globo</h4>
+        <p>El mayor periódico de Brasil (Río de Janeiro). PT formal. Ideal para lectura diaria de noticias.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">B1 → C2 · Prensa</span>
+      </a>
+      <a class="resource-card" href="https://www.folha.uol.com.br" target="_blank">
+        <div class="resource-icon" style="background:#E0F0FF;">📄</div>
+        <h4>Folha de São Paulo</h4>
+        <p>El periódico más leído de Brasil. Mayor cobertura de tecnología, salud y ciencia. Acceso parcial gratis.</p>
+        <span class="resource-tag" style="background:var(--azul-light); color:var(--azul);">B1 → C2 · São Paulo</span>
+      </a>
+      <a class="resource-card" href="https://www.bbc.com/portuguese/brasil" target="_blank">
+        <div class="resource-icon" style="background:#FFF5F5;">📡</div>
+        <h4>BBC News Brasil</h4>
+        <p>PT claro y estructurado. Ideal para B1+. Cobertura de salud pública, tecnología, COVID, ciencia.</p>
+        <span class="resource-tag" style="background:var(--vermelho-light); color:var(--vermelho);">B1 → C1 · Internacional</span>
+      </a>
+      <a class="resource-card" href="https://globoplay.globo.com" target="_blank">
+        <div class="resource-icon" style="background:#FFF0E0;">📺</div>
+        <h4>Globoplay</h4>
+        <p>Series y novelas brasileñas con subtítulos en PT. Plan gratuito disponible. Inmersión audiovisual total.</p>
+        <span class="resource-tag" style="background:var(--amarelo-light); color:#B07900;">B1 → C2 · TV BR</span>
+      </a>
+      <a class="resource-card" href="https://www.letras.mus.br" target="_blank">
+        <div class="resource-icon" style="background:#F0EBFF;">🎵</div>
+        <h4>Letras.mus.br</h4>
+        <p>Miles de letras de canciones brasileñas. Bossa nova, samba, MPB, funk, forró. Aprende cantando.</p>
+        <span class="resource-tag" style="background:var(--roxo-light); color:var(--roxo);">A2 → C1 · Música</span>
+      </a>
+      <a class="resource-card" href="https://www.piaui.folha.uol.com.br" target="_blank">
+        <div class="resource-icon" style="background:#E3F5EE;">😏</div>
+        <h4>Piauí Herald (sátira)</h4>
+        <p>Sátira política brasileña. Exposición a lenguaje coloquial real y referencias culturales. Nivel B2+.</p>
+        <span class="resource-tag" style="background:var(--verde-light); color:var(--verde);">B2 → C2 · Cultura</span>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+<hr class="sep">
+
+<!-- CRONOGRAMA -->
+<div id="cronograma">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Plan de 6 meses</div>
+    <h2>Cronograma semana a semana</h2>
+    <p class="section-desc">Un plan flexible. Ajusta intensidad según tu tiempo disponible.</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:32px;">
+    <div>
+      <h3 style="font-family:var(--serif); font-size:18px; margin-bottom:16px; color:var(--dark);">Mes 1–2: Cimientos</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--verde);"></div>
+          <div class="tl-week">SEMANA 1–2</div>
+          <div class="tl-title">Fonética + supervivencia</div>
+          <div class="tl-desc">Philipe Brazuca 7 días + Duolingo + 50languages. Foco en pronunciación.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--verde);"></div>
+          <div class="tl-week">SEMANA 3–4</div>
+          <div class="tl-title">Verbos esenciales + Anki</div>
+          <div class="tl-desc">Ser/estar/ter/ir/fazer/querer. Crear mazo Anki con 20 palabras/día.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--azul);"></div>
+          <div class="tl-week">SEMANA 5–6</div>
+          <div class="tl-title">Gramática A2 + primeras conversaciones</div>
+          <div class="tl-desc">Busuu A2 + PortuguesWeb. Primer intercambio en Tandem.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--azul);"></div>
+          <div class="tl-week">SEMANA 7–8</div>
+          <div class="tl-title">Podcast "Tá Falado" + escritura</div>
+          <div class="tl-desc">5 episodios de Tá Falado. Escribir un diario en PT de 5 líneas/día.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:var(--serif); font-size:18px; margin-bottom:16px; color:var(--dark);">Mes 3–4: Fluidez</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#F5A623;"></div>
+          <div class="tl-week">SEMANA 9–11</div>
+          <div class="tl-title">Subjuntivo + Series con subtítulos</div>
+          <div class="tl-desc">Série "3%" en Netflix con subs PT. Memrise idiomático. Tandem 3x/semana.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#F5A623;"></div>
+          <div class="tl-week">SEMANA 12–14</div>
+          <div class="tl-title">Vocabulario médico/tech</div>
+          <div class="tl-desc">Caminhos blog vocabulario médico. AprenderGratis curso salud. SciELO artículos simples.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--roxo);"></div>
+          <div class="tl-week">SEMANA 15–17</div>
+          <div class="tl-title">Lectura intensiva + BBC Brasil</div>
+          <div class="tl-desc">Leer O Globo 15 min/día. Escuchar Café Brasil 20 min/día. Sin subtítulos.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--roxo);"></div>
+          <div class="tl-week">SEMANA 18–20</div>
+          <div class="tl-title">Escritura técnica + presentaciones</div>
+          <div class="tl-desc">Escribir abstract médico en PT. Presentar caso clínico en PT con un compañero.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:32px;">
+    <h3 style="font-family:var(--serif); font-size:18px; margin-bottom:16px; color:var(--dark);">Mes 5–6: Mastery + llegada a Brasil</h3>
+    <div class="timeline" style="display:grid; grid-template-columns:1fr 1fr; gap:0;">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--vermelho);"></div>
+        <div class="tl-week">SEMANA 21–22</div>
+        <div class="tl-title">Inmersión total + humor</div>
+        <div class="tl-desc">Solo PT en redes sociales. Porta dos Fundos. Leer r/brasil diariamente. Rádio CBN.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--vermelho);"></div>
+        <div class="tl-week">SEMANA 23–24</div>
+        <div class="tl-title">Prep CELPE-Bras + simulacros</div>
+        <div class="tl-desc">Practicar examen CELPE-Bras con materiales oficiales del INEP gratuitos en inep.gov.br.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<hr class="sep">
+
+<!-- USO PROFESIONAL -->
+<div id="profesional">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Tu campo específico</div>
+    <h2>Português para Salud, Microbiología y Tecnología</h2>
+    <p class="section-desc">Recursos y vocabulario para tu área profesional en Brasil.</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:32px;">
+    <div style="background:white; border:1px solid var(--cinza-mid); border-radius:12px; overflow:hidden;">
+      <div style="background:var(--verde); padding:14px 16px;">
+        <h4 style="color:white; font-size:14px;">🏥 Saúde / Medicina</h4>
+      </div>
+      <div style="padding:16px; font-size:13px; color:var(--body); line-height:1.8;">
+        <strong>Recursos clave:</strong><br>
+        • <a href="https://caminhoslanguages.com/es/blog/medical-vocabulary-portuguese/" style="color:var(--verde);">Caminhos — Vocabulário médico</a><br>
+        • Aprendergratis.es → Curso "Português para Saúde"<br>
+        • SciELO.br — artículos de medicina en PT<br>
+        • CFM.org.br — Conselho Federal de Medicina<br><br>
+        <strong>Vocabulario urgente:</strong><br>
+        anamnese, triagem, prontuário, receita médica, posologia, via de administração, contraindicação
+      </div>
+    </div>
+    <div style="background:white; border:1px solid var(--cinza-mid); border-radius:12px; overflow:hidden;">
+      <div style="background:var(--azul); padding:14px 16px;">
+        <h4 style="color:white; font-size:14px;">🔬 Microbiologia</h4>
+      </div>
+      <div style="padding:16px; font-size:13px; color:var(--body); line-height:1.8;">
+        <strong>Recursos clave:</strong><br>
+        • SciELO.br → busca "microbiologia"<br>
+        • FIOCRUZ.br — Instituto Oswaldo Cruz<br>
+        • ANVISA.gov.br — vigilancia sanitaria<br>
+        • IOC.Fiocruz.br — cursos gratuitos<br><br>
+        <strong>Vocabulario urgente:</strong><br>
+        cepa, cultura bacteriana, antibiograma, resistência antimicrobiana, reagente, biossegurança, EPI, autoclave
+      </div>
+    </div>
+    <div style="background:white; border:1px solid var(--cinza-mid); border-radius:12px; overflow:hidden;">
+      <div style="background:var(--roxo); padding:14px 16px;">
+        <h4 style="color:white; font-size:14px;">💻 Tecnologia / Dev</h4>
+      </div>
+      <div style="padding:16px; font-size:13px; color:var(--body); line-height:1.8;">
+        <strong>Recursos clave:</strong><br>
+        • <a href="https://stackoverflow.com/questions/tagged/pt" style="color:var(--roxo);">Stack Overflow em PT</a><br>
+        • GitHub.com — issues en PT<br>
+        • DevMedia.com.br — dev BR<br>
+        • Tableless.com.br — frontend BR<br><br>
+        <strong>Vocabulario urgente:</strong><br>
+        desenvolvimento, repositório, depuração, banco de dados, requisição, implantação, código-fonte, sprint, squad
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="background:var(--verde-light); border:1px solid var(--verde-mid);">
+    <div class="callout-icon">💡</div>
+    <div class="callout-text">
+      <h4>El mercado laboral de Brasil en tu sector</h4>
+      <p>Brasil tiene el mayor sistema de salud pública de América Latina (SUS). La ANVISA regula medicamentos y dispositivos médicos. Para trabajar como profesional de salud en Brasil necesitarás revalidar tu título ante el <strong>CFM / CRF / CRBM</strong>. El sector tech tiene demanda alta de desarrolladores; muchas empresas brasileñas trabajan en inglés internamente pero la vida cotidiana y los clientes son siempre en PT.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<hr class="sep">
+
+<!-- VOCABULARIO CLAVE -->
+<div id="vocabulario">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Referencia rápida</div>
+    <h2>Vocabulario clave ES → PT-BR</h2>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('v-falsos')">⚠️ Falsos amigos</button>
+    <button class="tab-btn" onclick="switchTab('v-medico')">🏥 Médico</button>
+    <button class="tab-btn" onclick="switchTab('v-tech')">💻 Tech</button>
+    <button class="tab-btn" onclick="switchTab('v-cotidiano')">🏠 Cotidiano</button>
+    <button class="tab-btn" onclick="switchTab('v-gírias')">😎 Gírias</button>
+  </div>
+
+  <div id="tab-v-falsos" class="tab-pane active">
+    <div class="vocab-table-wrap">
+      <table class="vocab-table">
+        <thead><tr><th>Español</th><th>PT-BR correcto</th><th>PT-BR incorrecto</th><th>Nota</th></tr></thead>
+        <tbody>
+          <tr><td>embarazada</td><td class="pt">grávida</td><td style="color:var(--vermelho);">embaraçada</td><td class="note">embaraçada = avergonzada</td></tr>
+          <tr><td>borracha (ebria)</td><td class="pt">bêbada</td><td style="color:var(--vermelho);">borracha</td><td class="note">borracha = goma/caucho</td></tr>
+          <tr><td>polvo (limpieza)</td><td class="pt">pó</td><td style="color:var(--vermelho);">polvo</td><td class="note">polvo = pulpo</td></tr>
+          <tr><td>propina (coima)</td><td class="pt">propina / suborno</td><td style="color:var(--vermelho);">gorjeta</td><td class="note">gorjeta = propina (respetuosa)</td></tr>
+          <tr><td>exquisito (raro)</td><td class="pt">esquisito</td><td style="color:var(--vermelho);">requintado</td><td class="note">esquisito = extraño/raro</td></tr>
+          <tr><td>borrar (cancelar)</td><td class="pt">apagar / cancelar</td><td style="color:var(--vermelho);">borrar</td><td class="note">borrar = ensuciar/manchar</td></tr>
+          <tr><td>salada (refresco)</td><td class="pt">suco</td><td style="color:var(--vermelho);">-</td><td class="note">salada = ensalada siempre</td></tr>
+          <tr><td>tren</td><td class="pt">trem</td><td style="color:var(--vermelho);">comboio</td><td class="note">comboio es PT europeo</td></tr>
+          <tr><td>desayuno</td><td class="pt">café da manhã</td><td style="color:var(--vermelho);">pequeno-almoço</td><td class="note">pequeño-almoço = Portugal</td></tr>
+          <tr><td>autobús</td><td class="pt">ônibus</td><td style="color:var(--vermelho);">autocarro</td><td class="note">autocarro = Portugal</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-v-medico" class="tab-pane">
+    <div class="vocab-table-wrap">
+      <table class="vocab-table">
+        <thead><tr><th>Español</th><th>PT-BR</th><th>Uso clínico</th></tr></thead>
+        <tbody>
+          <tr><td>historia clínica</td><td class="pt">prontuário médico</td><td class="note">documento obligatorio SUS</td></tr>
+          <tr><td>consultorio</td><td class="pt">consultório</td><td></td></tr>
+          <tr><td>urgencias</td><td class="pt">pronto-socorro / UPA</td><td class="note">UPA = Unidade de Pronto Atendimento</td></tr>
+          <tr><td>análisis de sangre</td><td class="pt">exame de sangue</td><td></td></tr>
+          <tr><td>receta médica</td><td class="pt">receita médica</td><td class="note">receituário = talonario de recetas</td></tr>
+          <tr><td>enfermera/o</td><td class="pt">enfermeira/o</td><td></td></tr>
+          <tr><td>anestesia</td><td class="pt">anestesia</td><td class="note">igual que español</td></tr>
+          <tr><td>quirófano</td><td class="pt">sala de cirurgia / centro cirúrgico</td><td></td></tr>
+          <tr><td>fisioterapia</td><td class="pt">fisioterapia</td><td class="note">igual</td></tr>
+          <tr><td>microorganismo</td><td class="pt">microrganismo</td><td class="note">sin "o" entre micro y organismo</td></tr>
+          <tr><td>cultivo bacteriano</td><td class="pt">cultura bacteriana</td><td></td></tr>
+          <tr><td>resultado negativo</td><td class="pt">resultado negativo</td><td class="note">igual</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-v-tech" class="tab-pane">
+    <div class="vocab-table-wrap">
+      <table class="vocab-table">
+        <thead><tr><th>Español / Inglés</th><th>PT-BR</th><th>Nota</th></tr></thead>
+        <tbody>
+          <tr><td>desarrollador</td><td class="pt">desenvolvedor</td><td></td></tr>
+          <tr><td>base de datos</td><td class="pt">banco de dados</td><td></td></tr>
+          <tr><td>depurar / debug</td><td class="pt">depurar / debugar</td><td class="note">ambas formas aceptadas</td></tr>
+          <tr><td>repositorio</td><td class="pt">repositório</td><td></td></tr>
+          <tr><td>despliegue / deploy</td><td class="pt">implantação / deploy</td><td class="note">deploy es muy usado</td></tr>
+          <tr><td>código fuente</td><td class="pt">código-fonte</td><td></td></tr>
+          <tr><td>interfaz</td><td class="pt">interface</td><td></td></tr>
+          <tr><td>archivo</td><td class="pt">arquivo</td><td class="note">fichero = arquivo</td></tr>
+          <tr><td>carpeta / directorio</td><td class="pt">pasta / diretório</td><td></td></tr>
+          <tr><td>startup</td><td class="pt">startup</td><td class="note">misma palabra</td></tr>
+          <tr><td>sprint (scrum)</td><td class="pt">sprint</td><td class="note">misma palabra</td></tr>
+          <tr><td>contraseña</td><td class="pt">senha</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-v-cotidiano" class="tab-pane">
+    <div class="vocab-table-wrap">
+      <table class="vocab-table">
+        <thead><tr><th>Situación</th><th>Español</th><th>PT-BR</th></tr></thead>
+        <tbody>
+          <tr><td>Saludo informal</td><td>¿Qué más? ¿Cómo estás?</td><td class="pt">Oi! Tudo bem? / E aí?</td></tr>
+          <tr><td>Muy bien</td><td>Muy bien, gracias</td><td class="pt">Tudo ótimo! / Tô bem, obrigado(a)</td></tr>
+          <tr><td>No entiendo</td><td>No entiendo</td><td class="pt">Não entendo / Não tô entendendo</td></tr>
+          <tr><td>Más despacio</td><td>Habla más despacio</td><td class="pt">Fala mais devagar, por favor</td></tr>
+          <tr><td>¿Dónde está?</td><td>¿Dónde está el hospital?</td><td class="pt">Onde fica o hospital?</td></tr>
+          <tr><td>Pedir la cuenta</td><td>La cuenta, por favor</td><td class="pt">A conta, por favor</td></tr>
+          <tr><td>¡Genial!</td><td>¡Qué genial! / ¡Chévere!</td><td class="pt">Que legal! / Que bacana!</td></tr>
+          <tr><td>Está bien</td><td>Está bien / De acuerdo</td><td class="pt">Tá bom / Tá certo / Combinado</td></tr>
+          <tr><td>No sé</td><td>No sé</td><td class="pt">Não sei / Não faço ideia</td></tr>
+          <tr><td>Con permiso</td><td>Con permiso / Perdón</td><td class="pt">Com licença / Desculpa</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-v-gírias" class="tab-pane">
+    <div class="vocab-table-wrap">
+      <table class="vocab-table">
+        <thead><tr><th>Gíria PT-BR</th><th>Significado</th><th>Nivel de uso</th></tr></thead>
+        <tbody>
+          <tr><td class="pt">Saudade</td><td>Nostalgia profunda, extrañar algo/alguien</td><td class="note">Muy frecuente, única de PT</td></tr>
+          <tr><td class="pt">Legal</td><td>Genial, chévere, cool</td><td class="note">Cotidiano, muy común</td></tr>
+          <tr><td class="pt">Bacana</td><td>Bueno, bonito, interesante</td><td class="note">Coloquial</td></tr>
+          <tr><td class="pt">Tá ligado?</td><td>¿Entiendes? ¿Ves?</td><td class="note">Muy coloquial</td></tr>
+          <tr><td class="pt">Mano / cara</td><td>Pana, chico, tío</td><td class="note">Para amigos cercanos</td></tr>
+          <tr><td class="pt">Jeitinho brasileiro</td><td>Ingenio para resolver problemas "a la brasileña"</td><td class="note">Cultural, importante conocer</td></tr>
+          <tr><td class="pt">Vou indo</td><td>Me voy yendo (despedida)</td><td class="note">Más natural que "eu vou"</td></tr>
+          <tr><td class="pt">Não tô entendendo nada</td><td>No entiendo nada</td><td class="note">Forma hablada real</td></tr>
+          <tr><td class="pt">Com saudade</td><td>Extrañando / con nostalgia</td><td class="note">Expresión emotiva BR</td></tr>
+          <tr><td class="pt">Falou!</td><td>¡Dicho! ¡Trato hecho! ¡Hasta luego!</td><td class="note">Muy informal, cotidiano</td></tr>
+          <tr><td class="pt">Bora! / Vamos bora</td><td>¡Vamos! ¡Dale!</td><td class="note">Invitación a ir/hacer algo</td></tr>
+          <tr><td class="pt">Eita!</td><td>¡Caramba! ¡Vaya!</td><td class="note">Exclamación nordestina extendida</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<hr class="sep">
+
+<!-- INMERSIÓN -->
+<div id="inmersion">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Estrategia de inmersión</div>
+    <h2>Cómo crear un ambiente brasileño en Colombia</h2>
+    <p class="section-desc">Antes de llegar a Brasil, construye un entorno de inmersión desde ya.</p>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card" style="border-color:var(--verde); background:var(--verde-light);">
+      <h4 style="color:var(--verde);">📱 Cambia tu teléfono a PT-BR</h4>
+      <p style="color:#1A5E3E;">Configura el idioma de tu celular, apps (Spotify, Instagram, WhatsApp) a Português. Leerás PT cientos de veces al día.</p>
+    </div>
+    <div class="tip-card" style="border-color:var(--azul); background:var(--azul-light);">
+      <h4 style="color:var(--azul);">🎵 Solo música brasileña</h4>
+      <p style="color:#163A8A;">Crea una playlist en Spotify de MPB, bossa nova, samba, funk carioca. Artists: Caetano Veloso, Gilberto Gil, Anitta, Criolo.</p>
+    </div>
+    <div class="tip-card" style="border-color:#F5A623; background:var(--amarelo-light);">
+      <h4 style="color:#B07900;">📺 Series brasileñas en Netflix</h4>
+      <p style="color:#7A5000;">3% (distópica), Sintonia (drama urbano), Cidade Invisível (mitología BR), Arcanjo Renegado (policial). Subtítulos en PT.</p>
+    </div>
+    <div class="tip-card" style="border-color:var(--roxo); background:var(--roxo-light);">
+      <h4 style="color:var(--roxo);">✍️ Diario en português</h4>
+      <p style="color:#4A2B8C;">Escribe 5–10 líneas en PT cada noche. Empieza con "Hoje eu..." (Hoy yo...). El error es parte del proceso.</p>
+    </div>
+    <div class="tip-card" style="border-color:var(--verde); background:var(--verde-light);">
+      <h4 style="color:var(--verde);">🗣️ Piensa en PT durante 1 hora/día</h4>
+      <p style="color:#1A5E3E;">Traduce mentalmente lo que ves: "esta cadeira é confortável", "o café está quente". Entrena el cerebro a procesar en PT.</p>
+    </div>
+    <div class="tip-card" style="border-color:var(--vermelho); background:var(--vermelho-light);">
+      <h4 style="color:var(--vermelho);">🇧🇷 Comunidad brasileña en Valledupar / virtual</h4>
+      <p style="color:#7A1A1A;">Busca grupos de brasileños en Colombia (hay comunidades en Bogotá, Medellín). También grupos de Facebook de brasileños en el exterior.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="background:var(--amarelo-light); border:1px solid #F5A623; margin-top:24px;">
+    <div class="callout-icon">⏱️</div>
+    <div class="callout-text">
+      <h4>Rutina diaria recomendada (tiempo variable)</h4>
+      <p><strong>15 min mínimo:</strong> Anki flashcards · <strong>20 min:</strong> Un episodio de podcast (Tá Falado o Café Brasil) · <strong>15 min:</strong> Leer O Globo o BBC Brasil · <strong>2–3 veces/semana:</strong> Conversación en Tandem/HelloTalk 30 min · <strong>Fin de semana:</strong> Un episodio de serie BR sin subtítulos en español</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<hr class="sep">
+
+<!-- CERTIFICACIÓN -->
+<div id="certificacion">
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Oficialización</div>
+    <h2>Certificación CELPE-Bras</h2>
+    <p class="section-desc">El certificado oficial del gobierno brasileño para extranjeros.</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start;">
+    <div>
+      <div class="callout" style="background:var(--verde-light); border:1px solid var(--verde); margin-bottom:16px;">
+        <div class="callout-icon">🏆</div>
+        <div class="callout-text">
+          <h4>¿Qué es el CELPE-Bras?</h4>
+          <p>Certificação de Proficiência em Língua Portuguesa para Estrangeiros. Emitido por el MEC (Ministerio de Educación de Brasil). Es el único certificado oficialmente reconocido para trabajar y estudiar en Brasil en áreas reguladas como salud.</p>
+        </div>
+      </div>
+      <div class="callout" style="background:var(--azul-light); border:1px solid var(--azul);">
+        <div class="callout-icon">📋</div>
+        <div class="callout-text">
+          <h4>¿Para qué necesitas el CELPE-Bras?</h4>
+          <p>Revalidación de título universitario (Revalida para médicos) · Ingreso a posgrados en Brasil · Reconocimiento profesional ante el CFM, CRF, CRBM · Contratos formales en empresas reguladas</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <table style="font-size:13px; width:100%;">
+        <thead><tr><th>Nivel</th><th>Equivalente</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td><span class="level-badge" style="background:var(--verde-light); color:var(--verde);">Intermediário</span></td><td>B1</td><td>Comunicación cotidiana fluida</td></tr>
+          <tr><td><span class="level-badge" style="background:var(--azul-light); color:var(--azul);">Interm. Superior</span></td><td>B2</td><td>Temas complejos con claridad</td></tr>
+          <tr><td><span class="level-badge" style="background:var(--amarelo-light); color:#B07900;">Avançado</span></td><td>C1</td><td>Uso profesional y académico</td></tr>
+          <tr><td><span class="level-badge" style="background:var(--vermelho-light); color:var(--vermelho);">Avançado Superior</span></td><td>C2</td><td>Dominio casi nativo</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px; color:var(--cinza-text); margin-top:12px;">Para trabajar en salud se recomienda nivel <strong>Avançado (C1)</strong>. El examen se aplica en centros autorizados (Colombia tiene centros en Bogotá y otras ciudades).</p>
+      <p style="font-size:12px; color:var(--cinza-text); margin-top:8px;">Guías y materiales oficiales gratuitos: <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/celpe-bras" style="color:var(--azul);" target="_blank">gov.br/inep — CELPE-Bras</a></p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Guía elaborada con base en investigación de recursos disponibles en 2025–2026.</p>
+  <p style="margin-top:8px;"><strong>Boa sorte na sua jornada!</strong> 🇧🇷 · El português te espera.</p>
+  <p style="margin-top:12px; font-size:11px; color:rgba(255,255,255,0.3);">Todos los recursos listados son gratuitos al momento de la publicación. Verifica disponibilidad al acceder.</p>
+</footer>
+
+<script>
+  function togglePhase(id) {
+    const phase = document.getElementById(id);
+    phase.classList.toggle('open');
+  }
+
+  function switchTab(id) {
+    const allPanes = document.querySelectorAll('.tab-pane');
+    const allBtns = document.querySelectorAll('.tab-btn');
+    allPanes.forEach(p => p.classList.remove('active'));
+    allBtns.forEach(b => b.classList.remove('active'));
+
+    const pane = document.getElementById('tab-' + id);
+    if (pane) pane.classList.add('active');
+
+    const btns = document.querySelectorAll('.tab-btn');
+    btns.forEach(b => {
+      if (b.getAttribute('onclick') === "switchTab('" + id + "')") {
+        b.classList.add('active');
+      }
+    });
+  }
+
+  // Auto-open first phase
+  document.getElementById('phase1').classList.add('open');
+
+  // Animate progress bars on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const fill = e.target.querySelector('.progress-fill');
+        if (fill) { const w = fill.style.width; fill.style.width = '0'; setTimeout(() => fill.style.width = w, 100); }
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.phase-body').forEach(p => observer.observe(p));
+</script>
+</body>
+</html>
